@@ -1,0 +1,87 @@
+.timer{
+    display: inline-flex;
+    padding: 16px var(--spacing-8);
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-8, 32px);
+}
+.timer__title{
+    color: var(--foreground, #171717);
+    text-align: center;
+    font-family: var(--text);
+    /* text-xl/leading-8/semibold */
+    font-size: var(--font-xl);
+    font-style: normal;
+    font-weight: 600;
+    line-height: var(--leading-8); /* 160% */
+}
+.timer__text{
+    font-family: var(--text);
+    /* text-lg/leading-8/regular */
+    font-size: var(--font-xl);
+    font-weight: 400;
+    line-height: var(--leading-8); /* 160% */
+}
+.timer__begin-options{
+    display: flex;
+    align-items: center;
+}
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.timer__input{
+    margin-right: var(--spacing-2);
+}
+.timer__begin-options>*:last-child{
+    margin-left: var(--spacing-4);
+}
+.timer__begin-options .timer__input{
+    /*Layout*/
+    display: flex;
+    width: 60px;
+    height: 40px;
+    padding: var(--spacing-2) var(--spacing-3);
+    align-items: flex-start;
+    gap: 4px;
+    /*Styles*/
+    border-radius: var(--rounded-md, 6px);
+    border: 1px solid var(--border, #D4D4D4);
+    background: var(--background, #FFF);
+}
+.timer__number{
+    color: var(--muted-foreground, #525252);
+    text-align: center;
+    font-family: var(--display);
+    font-size: var(--font-6xl);
+    font-style: normal;
+    font-weight: 600;
+    line-height: var(--leading-none); /* 100% */
+}
+.timer__last-options{
+    display: flex;
+    gap: var(--spacing-4);
+}
+.timer__button{
+
+    font-family: var(--text);
+    font-size: var(--font-sm);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; 
+    padding: var(--spacing-2, 8px) var(--spacing-4, 16px);
+    border-radius: var(--rounded-md);
+    cursor: pointer;
+}
+.timer__start{
+    border: 1.5px solid var(--green-600);
+    background: var(--success);
+}
+.timer__stop{
+    border: 1.5px solid var(--danger-border, #DC2626);
+    background: var(--danger, #FEF2F2);
+}
+.timer__pause{
+    border:initial;
+    background: var(--secondary, #E5E5E5);
+}

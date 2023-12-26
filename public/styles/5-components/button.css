@@ -1,0 +1,144 @@
+/* Button */
+
+/* Default (primary) */
+
+.button {
+  display: inline-flex;
+  height: 2.5rem;
+  padding: var(--spacing-2) var(--spacing-4);
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-2);
+  border: 1px solid transparent;
+  border-radius: var(--rounded-md);
+  background-color: var(--primary);
+  cursor: pointer;
+  text-decoration: none;
+
+  font-size: var(--font-sm);
+  color: var(--primary-foreground);
+  line-height: var(--leading-5);
+  font-weight: 500;
+
+  transition: transform 25ms ease-out, background-color 300ms;
+}
+
+.button:hover {
+  background-color: var(--primary-hover);
+}
+
+.button:active {
+  background-color: var(--primary-active);
+  /* transform: translateY(2.5%); */  /* es lo que provoca un delay al momento de dar click*/
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Secondary */
+
+.button--secondary {
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+}
+
+.button--secondary:hover {
+  background-color: var(--secondary-hover);
+}
+
+.button--secondary:active {
+  background-color: var(--secondary-active);
+}
+
+/* Outline */
+
+.button--outline {
+  border-color: var(--border);
+  background-color: var(--background);
+  color: var(--secondary-foreground);
+}
+
+.button--outline:hover {
+  background-color: var(--background-hover);
+}
+
+.button--outline:active {
+  background-color: var(--background-active);
+}
+
+/* Sizes */
+
+.button--sm {
+  height: 2.25rem;
+  padding: var(--spacing-2) var(--spacing-3);
+}
+
+.button--fw{
+  height: 2.25rem;
+  width: 100%;  
+  padding: var(--spacing-2) var(--spacing-8);
+}
+
+.button--lg {
+  height: 2.75rem;
+  padding: var(--spacing-2) var(--spacing-8);
+}
+
+.button--icon {
+  height: 2.5rem;
+  width: 2.5rem;
+  padding: 0;
+}
+
+
+
+/* menuDropDown */
+
+.hidden{
+  display: none !important;
+}
+
+.menu-mobile{
+  display:  flex;
+  flex-direction: column;
+  gap: 16px;
+  
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  right: 0;
+  
+  background-color: #fff;
+  border: 1px solid #ccc;
+  list-style: none;
+  text-decoration: none;
+  padding-top: 28px;
+  padding-right: 16px;
+  padding-left: 16px;
+  padding-bottom: 32px;
+}
+
+.nav-menu-mobile{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.link-menu{
+  font-family: var(--text);
+  font-size: var( --font-sm);
+}
+
+.link-container{
+  margin:auto;
+  width: 343px;
+  height: 36px;
+}
+
+.dropDown-container{
+  padding: 0px, 16px, 32px, 16px
+}
