@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Temporizador</title>
+    <link rel="stylesheet" href="/styles/index.css" />
+    <script src="/js/index.js"></script>
+  </head>
+  <body>
+    <div class="pancake-stack" id="top">
+      <header class="header container">
+        <h1 class="header__logo"><a href="/index.html">Codificable</a></h1>
+        <nav class="header__navigation navigation">
+          <ul>
+            <li><a href="/blog/index.html">Blog</a></li>
+            <li><a href="#">Sobre nosotros</a></li>
+          </ul>
+        </nav>
+        <div class="header__actions">
+          <button class="button button--fw" id="open_modal">Login</button>
+        </div>
+        <!-- aca esta button de modo phone -->
+        <button
+          class="header__menu-icon button button--icon button--outline"
+          id="menuButton"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            class="menu-icon"
+          >
+            <path
+              d="M2.66663 8H13.3333M2.66663 4H13.3333M2.66663 12H13.3333"
+              stroke="currentColor"
+              stroke-width="1.33"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            class="x-icon hidden"
+          >
+            <path
+              d="M12 4L4 12M4 4L12 12"
+              stroke="#171717"
+              stroke-width="1.33"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <!--MENU DESPLEGABLE-->
+          <div class="menu-mobile hidden">
+            <nav class="nav-menu-mobile">
+              <a class="link-menu full-width" href="/blog/index.html">Blog</a>
+              <a class="link-menu full-width">Sobre Nosotros</a>
+            </nav>
+            <li><a class="button full-width" id="open_modal2">Login</a></li>
+          </div>
+        </button>
+      </header>
+
+      <main>
+        <div class="section">
+          <div class="container">
+            <div class="article-container">
+              <div class="toc">
+                <p class="toc__title">En este artículo:</p>
+                <ul class="toc__links">
+                  <li>
+                    <a href="#que-es-html">1. Estructura HTML y estilos</a>
+                  </li>
+                  <li>
+                    <a href="#etiquetas-elementos"
+                      >2. Añadir funcion al Input</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#Empezar">3. Añadir funcion a Empezar</a>
+                  </li>
+                  <li>
+                    <a href="#Pausar">4. Añadir funcion a Pausar </a>
+                  </li>
+                  <li>
+                    <a href="#Detener">5. Añadir funcion a Detener </a>
+                  </li>
+                  <li>
+                    <a href="#Ejemplo">Demo de temporizador </a>
+                  </li>
+                </ul>
+              </div>
+              <article class="article">
+                <header class="article__header">
+                  <div class="article-metadata">
+                    <span class="article-metadata__date">6 Octubre 2023</span>
+                    <span class="article-metadata__tag">Principiante</span>
+                  </div>
+                  <div class="author">
+                    <img
+                      src="/assets/images/kevin.jpg"
+                      alt="Kevin Avatar"
+                      width="320"
+                      height="480"
+                      class="author__avatar"
+                    />
+                    <div class="author__info">
+                      <strong class="author_name">Kevin Soras</strong>
+                      <span>Frontend Developer - Alegra</span>
+                    </div>
+                  </div>
+                </header>
+                <div class="content">
+                  <h1>Conoce como hacer un temporizador!</h1>
+                  <img
+                    src="/assets/images/temporizador.png"
+                    alt="Temporizador demo"
+                    width="1344"
+                    height="896"
+                  />
+                  <p>
+                    Si alguna vez te has preguntado cómo se podria hacer un
+                    temporizador usando HTML y Javascript ,este articulo te
+                    servirá como una guia. Constará de 5 pasos simples en los
+                    cuales te guiaremos hasta lograr el objetivo de un
+                    temporizador funcional.
+                  </p>
+                  <h2 id="que-es-html">1. Estructura HTML y estilos</h2>
+                  <p>
+                    En esta primera parte veremos solo la estructura , los
+                    estilos al ser un poco largos ,abrá un boton a continuación
+                    donde podras descargarlo y verlo a deteñimiento.
+                  </p>
+                  <p>
+                    Ahora veremos a continuación la estructura la cual consta de
+                    clases detalladas. Tenemos los botones de Empezar, Pausar y
+                    Detener , tambien un input donde pondremos los segundos. Es
+                    necesario tener nombres claros para poder trabajar mas facil
+                    luego en el JS.
+                  </p>
+                  <pre><code>&lt;div class="timer"&gt;
+    &lt;strong class="timer__title"&gt;Temporizador&lt;/strong&gt;
+    &lt;div class="timer__begin-options"&gt;
+        &lt;input type="number" class="timer__input" placeholder="00"/&gt;
+        &lt;p class="timer__text"&gt;segundos&lt;/p&gt;
+        &lt;button class="timer__button timer__start"&gt;Empezar&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;p class="timer__number"&gt;--&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="timer__last-options"&gt;
+        &lt;button class="timer__button timer__pause" disabled&gt;Pausar&lt;/button&gt;
+        &lt;button class="timer__button timer__stop" disabled&gt;Detener&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                  <h2 id="etiquetas-elementos">2. Añadir funcion al Input</h2>
+                  <p>
+                    Seleccionamos el input con 'querySelector' y luego le damos
+                    a timer__number el valor de timer__input mediante el
+                    siguiente codigo. Lo que estamos haciendo es que con cada
+                    entrada de texto mediante el teclado se active una función
+                    en especifico ,en este caso el evento se llama 'input'.
+                  </p>
+                  <pre><code>const inputChange = document.querySelector(".timer__input");
+const timeNumber = document.querySelector(".timer__number");
+
+inputChange.addEventListener("input", function(event) {
+    timeNumber.textContent=event.target.value
+});</code></pre>
+
+                  <h2 id="Empezar">3. Añadir funcion a Empezar</h2>
+                  <p>
+                    Antes de agregar la funcionalidad al boton de empezar
+                    ,necesitamos 2 funciones 'timer' que nos brindará la
+                    funcionalidad de disminuir el valor de la pantalla por cada
+                    segundo y la funcion 'clearTimer' que habilitará los botones
+                    'Pausar' y 'detener' a la vez de deshabilitara el 'input' y
+                    el boton 'Empezar'
+                  </p>
+                  <pre><code>function timer(time){
+    let idInterval= setInterval(function (){
+        timeNumber.textContent--
+    },1000)
+    let idStopTimer= setTimeout(function(){
+        clearInterval(idInterval)
+        clearTimer()
+    },(time*1000)+1000)
+    //transform second to milisecond ,+1 second to give 0
+    return[idInterval,idStopTimer] 
+}
+function clearTimer(){
+    inputChange.disabled=false,buttonStart.disabled=false
+    buttonPause.disabled=true,buttonStop.disabled=true
+    timeNumber.textContent="--"
+    inputChange.value=""
+}</code></pre>
+                  <p>
+                    Ahora que tenemos las funciones necesarias agregamos el
+                    evento al boton 'Empezar' ,donde deshabilitamos los botones
+                    que no nos interesan y guardamos los id de la funcion timer.
+                    (Nos serviran para poder eliminar los setInterval y
+                    setTimeOut cuando queramos)
+                  </p>
+                  <pre><code>buttonStart.addEventListener("click", function(event) {
+    inputChange.disabled=true,buttonStart.disabled=true
+    buttonPause.disabled=false,buttonStop.disabled=false
+    const [intervalId, stopTimerId] =timer(Number(inputChange.value))
+    idInterval = intervalId;
+    idStopTimer = stopTimerId;
+});</code></pre>
+                  <h2 id="Pausar">4. Añadir funcion a Pausar</h2>
+                  <p>
+                    Para darle la funcionalidad a pausar y continuar ,deberemos
+                    de saber cuando se trata de 'Pausar' y 'Continuar' ,asi que
+                    establecemos una condicional.
+                  </p>
+                  <ul>
+                    <li>
+                      Si el texto es 'Pausar' cambiamos el texto a 'Continuar' y
+                      eliminamos los id del timer guardado (Haremos que se
+                      detenga el contador y ya no disminuya y se detendra).
+                    </li>
+                    <li>
+                      Si el texto es 'Continuar' cambiamos el texto a 'Pausar' y
+                      empezamos denuevo la funcion timer ,pasandole como dato
+                      inicial el numero en el que nos habiamos quedado.
+                    </li>
+                  </ul>
+                  <pre><code>buttonPause.addEventListener("click", function(event) {
+    if(buttonPause.textContent === "Pausar"){
+        buttonPause.textContent="Continuar"
+        clearInterval(idInterval)
+        clearTimeout(idStopTimer)
+    }
+    else if(buttonPause.textContent === "Continuar"){
+        buttonPause.textContent="Pausar"
+        const [intervalId, stopTimerId] =timer(Number(timeNumber.textContent))
+        idInterval = intervalId;
+        idStopTimer = stopTimerId;
+    }
+});</code></pre>
+                  <h2 id="Detener">5. Añadir funcion a Detener</h2>
+                  <p>
+                    En esta ultimo boton lo que haremos será al igual que en la
+                    función de "Pausar" eliminaremos los id de la función timer
+                    para que se detenga, tambien llamaremos a la función
+                    clearTimer, por que al dar click a 'Detener' es como si
+                    hubiera terminado el temporizador y tiene que estar listo
+                    para empezar denuevo.
+                  </p>
+                  <pre><code>buttonStop.addEventListener("click", function(event) {
+    clearInterval(idInterval)
+    clearTimeout(idStopTimer)
+    clearTimer()
+});</code></pre>
+                  <h2 id="Ejemplo">Demo de temporizador</h2>
+                  <p>
+                    A continuación veremos una demo de como debe haber quedado
+                    despues de todo lo que hicimos.
+                  </p>
+                </div>
+                <div style="display: flex" class="timer">
+                  <strong class="timer__title">Temporizador</strong>
+                  <div class="timer__begin-options">
+                    <input
+                      type="number"
+                      class="timer__input"
+                      placeholder="00"
+                    />
+                    <p class="timer__text">segundos</p>
+                    <button class="timer__button timer__start">Empezar</button>
+                  </div>
+                  <div>
+                    <p class="timer__number">--</p>
+                  </div>
+                  <div class="timer__last-options">
+                    <button class="timer__button timer__pause" disabled>
+                      Pausar
+                    </button>
+                    <button class="timer__button timer__stop" disabled>
+                      Detener
+                    </button>
+                  </div>
+                </div>
+                <a class="back-to-top" href="#top">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g>
+                      <path
+                        d="M15 12.5L10 7.5L5 12.5"
+                        stroke="#171717"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </g>
+                  </svg>
+                  top
+                </a>
+              </article>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="container footer">
+        <ul class="social-links">
+          <li>
+            <a href="https://www.facebook.com/" target="_blank">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g>
+                  <path
+                    d="M18 2H15C13.6739 2 12.4021 2.52678 11.4645 3.46447C10.5268 4.40215 10 5.67392 10 7V10H7V14H10V22H14V14H17L18 10H14V7C14 6.73478 14.1054 6.48043 14.2929 6.29289C14.4804 6.10536 14.7348 6 15 6H18V2Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/" target="_blank">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g>
+                  <path
+                    d="M16 8C17.5913 8 19.1174 8.63214 20.2426 9.75736C21.3679 10.8826 22 12.4087 22 14V21H18V14C18 13.4696 17.7893 12.9609 17.4142 12.5858C17.0391 12.2107 16.5304 12 16 12C15.4696 12 14.9609 12.2107 14.5858 12.5858C14.2107 12.9609 14 13.4696 14 14V21H10V14C10 12.4087 10.6321 10.8826 11.7574 9.75736C12.8826 8.63214 14.4087 8 16 8Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M6 9H2V21H6V9Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M4 6C5.10457 6 6 5.10457 6 4C6 2.89543 5.10457 2 4 2C2.89543 2 2 2.89543 2 4C2 5.10457 2.89543 6 4 6Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.twitter.com/" target="_blank">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g>
+                  <path
+                    d="M22 4.00002C22 4.00002 21.3 6.10002 20 7.40002C21.6 17.4 10.6 24.7 2 19C4.2 19.1 6.4 18.4 8 17C3 15.5 0.5 9.60002 3 5.00002C5.2 7.60002 8.6 9.10002 12 9.00002C11.1 4.80002 16 2.40002 19 5.20002C20.1 5.20002 22 4.00002 22 4.00002Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.github.com/" target="_blank">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g>
+                  <path
+                    d="M15 22V18C15.1392 16.7473 14.78 15.4901 14 14.5C17 14.5 20 12.5 20 9C20.08 7.75 19.73 6.52 19 5.5C19.28 4.35 19.28 3.15 19 2C19 2 18 2 16 3.5C13.36 3 10.64 3 8.00004 3.5C6.00004 2 5.00004 2 5.00004 2C4.70004 3.15 4.70004 4.35 5.00004 5.5C4.27191 6.51588 3.91851 7.75279 4.00004 9C4.00004 12.5 7.00004 14.5 10 14.5C9.61004 14.99 9.32004 15.55 9.15004 16.15C8.98004 16.75 8.93004 17.38 9.00004 18V22"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M9 18C4.49 20 4 16 2 16"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+              </svg>
+            </a>
+          </li>
+        </ul>
+        <small class="footer__text"
+          >&copy; 2023 Codificable - Todos los derechos reservados</small
+        >
+      </footer>
+    </div>
+    <script src="../js/blog/temporizador.js"></script>
+    <!-- aca esta el Modal -->
+    <div id="my_modal" class="modal">
+      <div class="modal__container" id="modal__container">
+        <span class="modal__closed" id="modal__close">&times;</span>
+        <h1 class="modal_tittle">Ingresa a tu Cuenta</h1>
+        <div class="modal__labels">
+          <label class="label"
+            >Email<input
+              class="modal__input"
+              name="email"
+              type="email"
+              required
+              placeholder="user@mail.com"
+            />
+          </label>
+          <label class="label"
+            >Password<input
+              class="modal__input"
+              name="password"
+              type="password"
+              required
+            />
+          </label>
+          <button class="button button__modal">Login</button>
+        </div>
+      </div>
+    </div>
+    <script src="/js/modal.js"></script>
+  </body>
+</html>

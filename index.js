@@ -33,11 +33,11 @@ function getContentType(filePath) {
     case '.css':
       return 'text/css';
     case '.jpeg':
-      return 'image/jpeg'; // Corregido aquí
+      return 'image/jpeg'; 
     case '.js':
-      return 'text/javascript'; // Cambiado de 'text/js' a 'text/javascript'
+      return 'text/javascript'; 
     case '.png':
-      return 'image/png+xml'; // Corregido aquí
+      return 'image/png+xml'; 
     case '.svg':
       return 'image/svg+xml';
     default:

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Codificable - Blog: Creando una calculadora con HTML y Javascript</title>
+    <link rel="stylesheet" href="/styles/index.css" />
+    <script src="/js/index.js"></script>
+  </head>
+  <body>
+    <div class="pancake-stack" id="top">
+      <header class="header container">
+        <h1 class="header__logo"><a href="/index.html">Codificable</a></h1>
+        <nav class="header__navigation navigation">
+          <ul>
+            <li><a href="/blog/index.html">Blog</a></li>
+            <li><a href="#">Sobre nosotros</a></li>
+          </ul>
+        </nav>
+        <div class="header__actions">
+          <button class="button button--fw" id="open_modal">Login</button>
+        </div>
+
+        <!-- aca esta button de modo phone -->
+        <button
+          class="header__menu-icon button button--icon button--outline"
+          id="menuButton"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            class="menu-icon"
+          >
+            <path
+              d="M2.66663 8H13.3333M2.66663 4H13.3333M2.66663 12H13.3333"
+              stroke="currentColor"
+              stroke-width="1.33"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            class="x-icon hidden"
+          >
+            <path
+              d="M12 4L4 12M4 4L12 12"
+              stroke="#171717"
+              stroke-width="1.33"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <!--MENU DESPLEGABLE-->
+          <div class="menu-mobile hidden">
+            <nav class="nav-menu-mobile">
+              <a class="link-menu full-width" href="/blog/index.html">Blog</a>
+              <a class="link-menu full-width">Sobre Nosotros</a>
+            </nav>
+            <li><a class="button full-width" id="open_modal2">Login</a></li>
+          </div>
+        </button>
+      </header>
+
+      <main>
+        <div class="section">
+          <div class="container">
+            <div class="article-container">
+              <div class="toc">
+                <p class="toc__title">En este artículo:</p>
+                <ul class="toc__links">
+                  <li><a href="#creandoCalculadora">Creando una Calculadora</a></li>
+                  <li>
+                    <a href="#archivoCss">archivo CSS</a>
+                  </li>
+                  <li>
+                    <a href="#archivoHtml"
+                      >archivo Html</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#archivoJavascript"
+                      >archivo Javascript</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#probemosNuestraCalculadora"
+                      >¡probemosNuestraCalculadora!</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <article class="article">
+                <header class="article__header">
+                  <div class="article-metadata">
+                    <span class="article-metadata__date">06 Octubre 2023</span>
+                    <span class="article-metadata__tag">Principiante</span>
+                  </div>
+                  <div class="author">
+                    <img
+                      src="/assets/images/profile1.jpeg"
+                      alt="Micaela Bolognesi Avatar"
+                      width="320"
+                      height="480"
+                      class="author__avatar"
+                    />
+                    <div class="author__info">
+                      <strong class="author_name">Team 10</strong>
+                      <span>Frontend Developers - Codeable</span>
+                    </div>
+                  </div>
+                </header>
+                <div class="content">
+                  <h1 id="creandoCalculadora">Creando una calculadora con Javascript y HTML</h1>
+                  
+                  <p>
+                    Iniciamos definiendo la estructura que queremos para la calculadora.
+                    En este caso diseñamos la siguiente distribución:
+                  </p>
+                  <img
+                    src="/assets/images/Grid.JPG"
+                    alt="distribucion calculadora"
+                    width="518"
+                    height="488"
+                  />
+                  Con esta distribución, podemos crear el archivo CSS con un grid que identifique las areas mencionadas.
+                  <h2 id="archivoCss">Archivo CSS</h2>
+                  <pre><code>.contCalculator {
+  display: grid;
+  grid:
+    "screen screen screen screen screen" 1fr
+    ". . . . ." 1fr
+    ". . . . ." 1fr
+    ". . . . igual" 1fr
+    ". cero cero . igual" 1fr
+    / 1fr 1fr 1fr 1fr 1fr;
+  gap: 2px;
+
+  justify-content: center;
+  align-content: center;
+}
+
+.screen { grid-area: screen;}
+.igual { grid-area: igual;} 
+.cero { grid-area: cero; }}</code></pre>
+                  
+                  <p>
+                    El anterior es el codigo CSS base que permite la distribución. Puede aplicarse a gusto otros estilos adicionales a las areas o a los botones.</p>
+                  <p>
+                    Ya definida la estructura, podemos realizar el codigo HTML para cada area del grid
+                  </p>
+                  <h2 id="archivoHtml">Archivo HTML</h2>
+                  <p>
+                    Dentro de cada area ubicamos un boton, con el estilo CSS deseado y con el evento Onclick que llame a las funciones que definiremos en el archivo Javascript.
+                  </p>
+                  
+                  <pre><code>
+&ltsection class="contCalculator"&gt
+&ltdiv class="screen">&ltinput type="text" id="result"   />&lt/div&gt
+&ltdiv class="igual">&ltbutton class="btn igual" onclick="calc()" >=&lt/button>&lt/div&gt
+&ltdiv class="cero">&ltbutton class="btn" onclick="keyNum('0')">0&lt/button>&lt/div&gt
+&ltdiv>&ltbutton class="btn" onclick="keyOp('/')">/&lt/button>&lt/div&gt
+&ltdiv>&ltbutton class="btn" onclick="keyNum('1')">1&lt/button>&lt/div&gt
+&ltdiv>&ltbutton class="btn" onclick="keyNum('2')">2&lt/button>&lt/div&gt
+&ltdiv>&ltbutton class="btn" onclick="keyNum('3')">3&lt/button>&lt/div&gt
+&ltdiv>&ltbutton onclick="delLast()" class="btn" &gt
+ &ltimg src = "/assets/icons/delete-svgrepo-com.svg" class="imgCalc" />&lt/button>&lt/div&gt
+&ltdiv>&ltbutton class="btn" onclick="keyOp('*')">x&lt/button>&lt/div&gt
+&ltdiv>&ltbutton class="btn" onclick="keyNum('5')">5&lt/button>&lt/div&gt
+&ltdiv>&ltbutton class="btn" onclick="keyNum('6')">6&lt/button>&lt/div&gt
+&ltdiv>&ltbutton onclick="del()" class="btn" >C&lt/button>&lt/div&gt
+&ltdiv>&ltbutton class="btn" onclick="keyOp('-')">-&lt/button>&lt/div&gt
+&ltdiv>&ltbutton class="btn" onclick="keyNum('7')">7&lt/button>&lt/div&gt
+&ltdiv>&ltbutton class="btn" onclick="keyNum('8')">8&lt/button>&lt/div&gt
+&ltdiv>&ltbutton class="btn" onclick="keyNum('9')">9&lt/button>&lt/div&gt
+&ltdiv>&ltbutton class="btn" onclick="keyOp('+')">+&lt/button>&lt/div&gt
+&ltdiv>&ltbutton class="btn" onclick="keyNum('.')">.&lt/button>&lt/div&gt
+&lt/section&gt  
+                  </code></pre>
+                  <p>
+                    Definimos la funcion <strong>keyNum()</strong> cuando se haga click en algun numero o en el punto(.)
+                  </p>
+                  <p>
+                    Definimos la funcion <strong>keyOp()</strong> cuando se haga click en algun operador.
+                  </p>
+                  <p>
+                    Definimos la funcion <strong>del()</strong> cuando se haga click en la tecla "C" y borre la pantalla.
+                  </p>
+                  <p>
+                    Definimos la funcion <strong>delLast()</strong> cuando se haga click en la tecla atras.
+                  </p>
+                  <p>
+                    Y por ultimo definimos la funcion <strong>calc()</strong> cuando se haga click en la tecla resultado.
+                  </p>
+                  <h2 id="archivoJavascript">Archivo JavaScript</h2>
+                  <p>
+                    Ahora que tenemos todo, creamos el codigo para cada función en Javascript.
+                  </p>
+
+                  
+<pre><code>
+  function keyNum(val) {
+    lastKey = val;
+    document.getElementById("result").value += val;
+    printValue.push(lastKey);
+  }
+  
+  function keyOp(val) {
+    if (printValue.length !== 0) {
+      if (
+        printValue.at(-1) === "+" ||
+        printValue.at(-1) === "-" ||
+        printValue.at(-1) === "*" ||
+        printValue.at(-1) === "/"
+      ) {
+        lastKey = val;
+        printValue.pop();
+        document.getElementById("result").value = printValue.join("");
+        printValue.push(lastKey);
+        document.getElementById("result").value += val;
+      } else {
+        lastKey = val;
+        printValue.push(lastKey);
+        document.getElementById("result").value += val;
+      }
+    }
+  }
+  
+  function del() {
+    document.getElementById("result").value = "";
+    printValue = [];
+  }
+  
+  function delLast() {
+    if (printValue.length !== 0) {
+      printValue.pop();
+      resulValue = printValue.join("");
+      document.getElementById("result").value = resulValue;
+    } else {
+      document.getElementById("result").value = "";
+    }
+  }
+  
+  function calc() {
+    let x = document.getElementById("result").value;
+    let y = eval(x);
+    document.getElementById("result").value = y;
+    printValue = [];
+    printValue[0] = y;
+    return y;
+  }
+  
+  let resulValue;
+  let printValue = [];
+  let lastKey = "";
+</code></pre>
+
+ 
+                  <h2 id="probemosNuestraCalculadora">
+                    ¡Probemos nuestra calculadora!
+                  </h2>
+                  <p>
+                    A continuación puedes probar la funcionalidad de la calculadora que acabamos de crear.
+                  </p>
+                </div>
+                <br/>
+                <!-- Aqui va la calculadora -->
+                <div style="display:flex;align-items: center;flex-direction: column">
+                    
+
+                      <section class="contCalculator">
+                        <input class="screen" type="text" id="result"   />
+                        <div class="igual"><button class="btn igual" onclick="calc()" >=</button></div>
+                        <div class="cero"><button class="btn" onclick="keyNum('0')">0</button></div>
+                        <div><button class="btn" onclick="keyOp('/')">/</button></div>
+                        <div><button class="btn" onclick="keyNum('1')">1</button></div>
+                        <div><button class="btn" onclick="keyNum('2')">2</button></div>
+                        <div><button class="btn" onclick="keyNum('3')">3</button></div>
+                        <div><button onclick="delLast()" class="btn" >
+                          <img src = "/assets/icons/delete-svgrepo-com.svg" class="imgCalc" /></button></div>
+                        <div><button class="btn" onclick="keyOp('*')">x</button></div>
+                        <div><button class="btn" onclick="keyNum('4')">4</button></div>
+                        <div><button class="btn" onclick="keyNum('5')">5</button></div>
+                        <div><button class="btn" onclick="keyNum('6')">6</button></div>
+                        <div><button onclick="del()" class="btn" >C</button></div>
+                        <div><button class="btn" onclick="keyOp('-')">-</button></div>
+                        <div><button class="btn" onclick="keyNum('7')">7</button></div>
+                        <div><button class="btn" onclick="keyNum('8')">8</button></div>
+                        <div><button class="btn" onclick="keyNum('9')">9</button></div>
+                        <div><button class="btn" onclick="keyOp('+')">+</button></div>
+                        <div><button class="btn" onclick="keyNum('.')">.</button></div>
+                        
+                        
+                      </section>
+                    
+                      
+            
+                    
+                
+
+                <!-- Aqui termina la calculadora -->
+                
+                <a class="back-to-top" href="#top">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g>
+                      <path
+                        d="M15 12.5L10 7.5L5 12.5"
+                        stroke="#171717"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </g>
+                  </svg>
+                  top
+                </a>
+              </article>
+            </div>
+            
+          </div>
+        </div>
+      </main>
+
+      <footer class="container footer">
+        <ul class="footer-links">
+          <li><a href="">Link 1</a></li>
+          <li><a href="">Link 2</a></li>
+          <li><a href="">Link 3</a></li>
+          <li><a href="">Link 4</a></li>
+          <li><a href="">Link 5</a></li>
+        </ul>
+        <ul class="social-links">
+          <li>
+            <a href="https://www.facebook.com/" target="_blank">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g>
+                  <path
+                    d="M18 2H15C13.6739 2 12.4021 2.52678 11.4645 3.46447C10.5268 4.40215 10 5.67392 10 7V10H7V14H10V22H14V14H17L18 10H14V7C14 6.73478 14.1054 6.48043 14.2929 6.29289C14.4804 6.10536 14.7348 6 15 6H18V2Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/" target="_blank">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g>
+                  <path
+                    d="M16 8C17.5913 8 19.1174 8.63214 20.2426 9.75736C21.3679 10.8826 22 12.4087 22 14V21H18V14C18 13.4696 17.7893 12.9609 17.4142 12.5858C17.0391 12.2107 16.5304 12 16 12C15.4696 12 14.9609 12.2107 14.5858 12.5858C14.2107 12.9609 14 13.4696 14 14V21H10V14C10 12.4087 10.6321 10.8826 11.7574 9.75736C12.8826 8.63214 14.4087 8 16 8Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M6 9H2V21H6V9Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M4 6C5.10457 6 6 5.10457 6 4C6 2.89543 5.10457 2 4 2C2.89543 2 2 2.89543 2 4C2 5.10457 2.89543 6 4 6Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.twitter.com/" target="_blank">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g>
+                  <path
+                    d="M22 4.00002C22 4.00002 21.3 6.10002 20 7.40002C21.6 17.4 10.6 24.7 2 19C4.2 19.1 6.4 18.4 8 17C3 15.5 0.5 9.60002 3 5.00002C5.2 7.60002 8.6 9.10002 12 9.00002C11.1 4.80002 16 2.40002 19 5.20002C20.1 5.20002 22 4.00002 22 4.00002Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.github.com/" target="_blank">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g>
+                  <path
+                    d="M15 22V18C15.1392 16.7473 14.78 15.4901 14 14.5C17 14.5 20 12.5 20 9C20.08 7.75 19.73 6.52 19 5.5C19.28 4.35 19.28 3.15 19 2C19 2 18 2 16 3.5C13.36 3 10.64 3 8.00004 3.5C6.00004 2 5.00004 2 5.00004 2C4.70004 3.15 4.70004 4.35 5.00004 5.5C4.27191 6.51588 3.91851 7.75279 4.00004 9C4.00004 12.5 7.00004 14.5 10 14.5C9.61004 14.99 9.32004 15.55 9.15004 16.15C8.98004 16.75 8.93004 17.38 9.00004 18V22"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M9 18C4.49 20 4 16 2 16"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+              </svg>
+            </a>
+          </li>
+        </ul>
+        <small class="footer__text"
+          >&copy; 2023 Codificable - Todos los derechos reservados</small
+        >
+      </footer>
+    </div>
+    <!-- aca esta el Modal -->
+    <div id="my_modal" class="modal">
+      <div class="modal__container" id="modal__container">
+        <span class="modal__closed" id="modal__close">&times;</span>
+        <h1 class="modal_tittle">Ingresa a tu Cuenta</h1>
+        <div class="modal__labels">
+          <label class="label"
+            >Email<input
+              class="modal__input"
+              name="email"
+              type="email"
+              required
+              placeholder="user@mail.com"
+            />
+          </label>
+          <label class="label"
+            >Password<input
+              class="modal__input"
+              name="password"
+              type="password"
+              required
+            />
+          </label>
+          <button class="button button__modal">Login</button>
+        </div>
+      </div>
+    </div>
+    <script src="/calculadora.js"></script>
+    <script src="/js/modal.js"></script>
+  </body>
+</html>
